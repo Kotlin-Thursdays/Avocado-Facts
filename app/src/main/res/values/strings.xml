@@ -3,4 +3,6 @@
     <string name="did_you_know">Did you know?</string>
     <string name="avocadoFact">Astronauts do not eat avocados while in space, this is partially because avocados do not have efficient rockets to reach the International Space Program.</string>
     <string name="title">Avocado fact of the day:</string>
+    <string name="avocado_icon_description">Avocado guy</string>
+    <string name="avocado_fact_of_the_day">Avocado fact of the day:</string>
 </resources>
