@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import java.lang.ref.WeakReference
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -22,9 +23,9 @@ class MainActivity : AppCompatActivity() {
         // Assign the Views from the layout
         factTextView = findViewById(R.id.avocadoFact)
 
-        var moarButton = findViewById<Button>(R.id.more)
+        val moarButton = findViewById<Button>(R.id.more)
         moarButton.setOnClickListener {
-            NewAvocadoFactTask(this).execute();
+            NewAvocadoFactTask(this).execute()
         }
 
     }
@@ -39,7 +40,8 @@ class MainActivity : AppCompatActivity() {
      * result : String
      * This is depicted the AsyncTask signature
      */
-    private class NewAvocadoFactTask(val activity: MainActivity) : AsyncTask<Void, Void, String>(){
+    private class NewAvocadoFactTask(activity: MainActivity) : AsyncTask<Void, Void, String>(){
+        var reference: WeakReference<MainActivity> = WeakReference(activity)
 
 
         private val facts = arrayOf("fact 1",
@@ -52,8 +54,8 @@ class MainActivity : AppCompatActivity() {
                 "fact 8",
                 "fact 9",
                 "fact 10")
+
         override fun doInBackground(vararg params: Void?): String {
-            Log.v("NewAvocadoFactTask","started")
             val randomGen = Random()
             val randomNumber = randomGen.nextInt(10)
             return facts.get(randomNumber)
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            result?.let { activity.updateAvacadoFact(it) }
+            result?.let { reference.get()?.updateAvacadoFact(it) }
         }
 
     }
