@@ -28,20 +28,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun updateAvacadoFact(fact:String){
+    fun updateAvocadoFact(fact: String) {
         factTextView.text = fact
     }
 
     /**
-     * progress : Void
-     * params : Void
-     * result : String
-     * This is depicted the AsyncTask signature
+     * AsyncTask<Params, Progress, Result> signature interface:
+     * - params: the type of the parameters sent to the task upon
+     *             execution
+     * - progress: the type of the progress units published during the
+     *             background computation
+     * - result: the type of the result of the background computation
      */
-    private class NewAvocadoFactTask(activity: MainActivity) : AsyncTask<Void, Void, String>(){
+    private class NewAvocadoFactTask(activity: MainActivity) : AsyncTask<Void, Void, String>() {
         var reference: WeakReference<MainActivity> = WeakReference(activity)
-        val tag: String = "NewAvocadoFactTask"
 
+        companion object {
+            const val TAG: String = "NewAvocadoFactTask"
+        }
         private val facts = arrayOf("fact 1",
                 "fact 2",
                 "fact 3",
@@ -54,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 "fact 10")
 
         override fun doInBackground(vararg params: Void?): String {
-            Log.v(tag,"doInBackground is running on ${Thread.currentThread().name}")
+            Log.v(TAG, "doInBackground is running on ${Thread.currentThread().name}")
 
             val randomGen = Random()
             val randomNumber = randomGen.nextInt(10)
@@ -62,10 +66,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onPostExecute(result: String?) {
-            Log.v(tag,"onPostExecute is running on ${Thread.currentThread().name}")
+            Log.v(TAG, "onPostExecute is running on ${Thread.currentThread().name}")
             super.onPostExecute(result)
             result?.let {
-                reference.get()?.updateAvacadoFact(it)  // if reference.get is not null execute the function
+                reference.get()?.updateAvocadoFact(it)  // if reference.get is not null execute the function
             }
         }
     }
