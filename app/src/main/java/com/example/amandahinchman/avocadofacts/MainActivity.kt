@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity() {
     // Declare our View Variables
     private lateinit var factTextView: TextView
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,7 +40,7 @@ class MainActivity : AppCompatActivity() {
      */
     private class NewAvocadoFactTask(activity: MainActivity) : AsyncTask<Void, Void, String>(){
         var reference: WeakReference<MainActivity> = WeakReference(activity)
-
+        val tag: String = "NewAvocadoFactTask"
 
         private val facts = arrayOf("fact 1",
                 "fact 2",
@@ -56,15 +54,19 @@ class MainActivity : AppCompatActivity() {
                 "fact 10")
 
         override fun doInBackground(vararg params: Void?): String {
+            Log.v(tag,"doInBackground is running on ${Thread.currentThread().name}")
+
             val randomGen = Random()
             val randomNumber = randomGen.nextInt(10)
-            return facts.get(randomNumber)
+            return facts[randomNumber]
         }
 
         override fun onPostExecute(result: String?) {
+            Log.v(tag,"onPostExecute is running on ${Thread.currentThread().name}")
             super.onPostExecute(result)
-            result?.let { reference.get()?.updateAvacadoFact(it) }
+            result?.let {
+                reference.get()?.updateAvacadoFact(it)  // if reference.get is not null execute the function
+            }
         }
-
     }
 }
