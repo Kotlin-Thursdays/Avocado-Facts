@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         var moarButton = findViewById<Button>(R.id.more)
         moarButton.setOnClickListener {
-            val randomGen= Random()
-            val randomNumber= randomGen.nextInt(10)
+            val randomGen = Random()
+            val randomNumber = randomGen.nextInt(10)
             factTextView.text = facts.get(randomNumber)
         }
 

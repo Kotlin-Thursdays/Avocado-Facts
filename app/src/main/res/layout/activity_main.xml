@@ -54,7 +54,7 @@
         android:id="@+id/more"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-
+        android:layout_margin="16dp"
         android:text="More" />
 
 </RelativeLayout>
