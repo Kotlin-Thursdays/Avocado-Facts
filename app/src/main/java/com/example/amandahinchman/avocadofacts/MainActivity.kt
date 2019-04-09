@@ -46,16 +46,17 @@ class MainActivity : AppCompatActivity() {
         companion object {
             const val TAG: String = "NewAvocadoFactTask"
         }
-        private val facts = arrayOf("fact 1",
-                "fact 2",
-                "fact 3",
-                "fact 4",
-                "fact 5",
-                "fact 6",
-                "fact 7",
-                "fact 8",
-                "fact 9",
-                "fact 10")
+        private val facts = arrayOf("The world record for the largest avocado is 5 pounds, 3.6 ounces. This is especially impressive because the average avocado only weighs 6 ounces.",
+                "This fruit – yes it is a fruit! – was not originally named \"avocado\". The word \"avocado\" comes from " +
+                        "the Spanish word aguacate, which is from the the Nahuatl word ahuacatl. When I lived in Chile, we called it palta, which is its Quechua name. It's also sometimes called the alligator pear due to the shape and rough green skin (cut it open and it looks like an alligator eye, too). I prefer to call it palta; my strong love for avocados started in Chile.",
+                "The skin of an avocado can be toxic – to cats and dogs. While your pets (besides birds) can eat the inside of an avocado, the skin can be toxic to cats and dogs.",
+                "All avocados are picked by hand.Avocados are harvested by using a 16-foot pole to reach the high-hanging fruit. Avocados tend to be more expensive than other fruits because of the high cost of labor.",
+                "Avocados are high in potassium, fiber, and antioxidants.Avocados are actually higher in potassium than bananas.",
+                "Avocados contain four grams of protein, making them the fruit with the highest protein content!",
+                "Avocado trees do not self-pollinate; they need another avocado tree close by in order to grow. Avocados are an Aztec symbol of love and fertility, and they also grow in pairs on trees.",
+                "On average, 53.5 million pounds of guacamole are eaten every Super Bowl Sunday, enough to cover a football field more than 20 feet thick.8",
+                "A single California Avocado tree can produce on average about 60 pounds or 150 fruit a year.",
+                "Scientists have unearthed evidences from a cave in Mexico’s Coxcatlan in Mexico, which reveal that avocados were used as far back as in 10,000 BCE.")
 
         override fun doInBackground(vararg params: Void?): String {
             Log.v(TAG, "doInBackground is running on ${Thread.currentThread().name}")
