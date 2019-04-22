@@ -27,15 +27,29 @@ class MainActivity : AppCompatActivity() {
         moarButton.setOnClickListener { getRandomFact() }
     }
 
+    }
+
     fun updateAvocadoFact(fact: String) {
         factTextView.text = fact
     }
+
+
+    private val facts = arrayOf("fact 1",
+            "fact 2",
+            "fact 3",
+            "fact 4",
+            "fact 5",
+            "fact 6",
+            "fact 7",
+            "fact 8",
+            "fact 9",
+            "fact 10")
 
     private fun getRandomFact(){
         doAsync{
             val randomGen = Random()
             val randomNumber = randomGen.nextInt(10)
-            val fact = getFacts()[randomNumber]
+            val fact =facts[randomNumber]
             Log.v(MainActivity.TAG, "doAsync is running on ${Thread.currentThread().name}")
           uiThread {
               updateAvocadoFact(fact)
