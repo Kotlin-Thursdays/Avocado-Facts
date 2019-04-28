@@ -1,46 +1,44 @@
 package com.example.amandahinchman.avocadofacts
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
-    companion object {
-        const val TAG: String = "MainActivity"
-    }
-    // Declare our View Variables
-    private lateinit var factTextView: TextView
+open class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Assign the Views from the layout
-        factTextView = findViewById(R.id.avocadoFact)
-
-        val moarButton = findViewById<Button>(R.id.more)
-        moarButton.setOnClickListener { getRandomFact() }
+        more.setOnClickListener { getRandomFact() }
     }
 
     fun updateAvocadoFact(fact: String) {
-        factTextView.text = fact
+        avocadoFact.text = fact
     }
 
-    private fun getRandomFact(){
+    fun getRandomFact(){
         doAsync{
-            val randomGen = Random()
-            val randomNumber = randomGen.nextInt(10)
-            val fact = getFacts()[randomNumber]
+            val getFacts = FactProvider.getInstance().getFacts()
+            val randomNum = Random().nextInt(getFacts.size)
+            val fact = getFacts[randomNum]
+
             Log.v(MainActivity.TAG, "doAsync is running on ${Thread.currentThread().name}")
-          uiThread {
+
+            uiThread {
               updateAvocadoFact(fact)
               Log.v(MainActivity.TAG, "uiThread is running on ${Thread.currentThread().name}")
-          }
+            }
         }
+    }
+
+    companion object {
+        const val TAG: String = "MainActivity"
+
+        fun getInstance() = MainActivity()
     }
 }
