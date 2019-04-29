@@ -10,6 +10,8 @@ import java.util.*
 
 open class MainActivity : AppCompatActivity() {
 
+    lateinit var newFact: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,20 +20,21 @@ open class MainActivity : AppCompatActivity() {
     }
 
     fun updateAvocadoFact(fact: String) {
-        avocadoFact.text = fact
+        newFact = fact
+        // avocadoFact?.text = newFact
     }
 
     fun getRandomFact(){
-        doAsync{
+        doAsync {
             val getFacts = FactProvider.getInstance().getFacts()
-            val randomNum = Random().nextInt(getFacts.size)
+            val randomNum = Random(1).nextInt(getFacts.size)
             val fact = getFacts[randomNum]
 
             Log.v(MainActivity.TAG, "doAsync is running on ${Thread.currentThread().name}")
 
             uiThread {
-              updateAvocadoFact(fact)
-              Log.v(MainActivity.TAG, "uiThread is running on ${Thread.currentThread().name}")
+                updateAvocadoFact(fact)
+                Log.v(MainActivity.TAG, "uiThread is running on ${Thread.currentThread().name}")
             }
         }
     }
