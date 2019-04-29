@@ -48,5 +48,13 @@
         android:text="@string/avocado_fact_of_the_day"
         android:textColor="#222"
         android:textSize="32sp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/more"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        android:text="More" />
 
 </RelativeLayout>
